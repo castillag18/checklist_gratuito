@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico Operacional Gratuito — Zynk Tech Solutions</title>
+<meta name="description" content="Descubre en 2 minutos en qué está perdiendo tiempo y dinero tu operación. POS, inventarios y automatización.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F5F5F0;
+    --surface: #FFFFFF;
+    --ink: #0F0F0E;
+    --ink-2: #5A5A56;
+    --ink-3: #9A9A94;
+    --accent: #1A3BFF;
+    --accent-light: #EBF0FF;
+    --accent-dark: #0F27CC;
+    --success: #0F6E56;
+    --success-bg: #E1F5EE;
+    --warn: #854F0B;
+    --warn-bg: #FAEEDA;
+    --border: rgba(15,15,14,0.10);
+    --border-strong: rgba(15,15,14,0.18);
+    --radius: 10px;
+    --radius-lg: 16px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .page-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* NAV */
+  nav {
+    padding: 20px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--accent); }
+  .nav-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    border: 1px solid var(--border-strong);
+    padding: 4px 10px;
+    border-radius: 99px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 48px 0 36px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 5vw, 42px);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: var(--ink-2);
+    max-width: 520px;
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-stat {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .hero-stat svg { flex-shrink: 0; }
+
+  /* PROGRESS BAR */
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 32px 0 8px;
+  }
+  .progress-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .progress-count {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  .progress-track {
+    width: 100%;
+    height: 3px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 99px;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 28px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .section-pill {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: 99px;
+    margin-left: 6px;
+  }
+  .pill-pos { background: var(--accent-light); color: var(--accent-dark); }
+  .pill-inv { background: var(--success-bg); color: var(--success); }
+  .pill-auto { background: #F3EFFE; color: #534AB7; }
+
+  /* CHECKLIST ITEMS */
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    user-select: none;
+  }
+  .item:hover { border-color: var(--border-strong); }
+  .item.checked {
+    background: var(--success-bg);
+    border-color: #9FE1CB;
+  }
+  .item-num {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-3);
+    min-width: 20px;
+    padding-top: 2px;
+  }
+  .item-box {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: 1.5px solid var(--border-strong);
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    transition: all 0.15s;
+  }
+  .item.checked .item-box {
+    background: var(--success);
+    border-color: var(--success);
+  }
+  .item-box svg { display: none; }
+  .item.checked .item-box svg { display: block; }
+  .item-body { flex: 1; }
+  .item-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 3px;
+    transition: color 0.15s;
+  }
+  .item.checked .item-title { color: var(--success); }
+  .item-desc {
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+
+  /* FORM */
+  .form-block {
+    margin-top: 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px 28px 24px;
+  }
+  .form-block h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .form-block p {
+    font-size: 14px;
+    color: var(--ink-2);
+    margin-bottom: 22px;
+  }
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink-2);
+    margin-bottom: 6px;
+  }
+  .field input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--bg);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .field input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(26,59,255,0.10);
+  }
+  .field input::placeholder { color: var(--ink-3); }
+  .submit-btn {
+    width: 100%;
+    padding: 13px;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .submit-btn:hover { background: var(--accent-dark); }
+  .submit-btn:active { transform: scale(0.99); }
+  .submit-btn:disabled { background: var(--ink-3); cursor: not-allowed; }
+  .form-disclaimer {
+    font-size: 11px;
+    color: var(--ink-3);
+    text-align: center;
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+
+  /* RESULT */
+  .result-block {
+    display: none;
+    margin-top: 40px;
+    background: var(--surface);
+    border: 1px solid #9FE1CB;
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    text-align: center;
+  }
+  .result-block.visible { display: block; }
+  .result-icon {
+    width: 52px;
+    height: 52px;
+    background: var(--success-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+  .result-block h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .result-block p {
+    font-size: 14px;
+    color: var(--ink-2);
+    max-width: 420px;
+    margin: 0 auto 20px;
+    line-height: 1.6;
+  }
+  .result-score {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    background: var(--success-bg);
+    border: 1px solid #9FE1CB;
+    padding: 8px 20px;
+    border-radius: 99px;
+    margin-bottom: 20px;
+  }
+  .result-score-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--success);
+  }
+  .result-score-label {
+    font-size: 13px;
+    color: var(--success);
+    font-weight: 500;
+  }
+  .result-cta {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .result-cta:hover { background: var(--accent-dark); }
+
+  /* ALERT */
+  .alert {
+    display: none;
+    padding: 10px 14px;
+    background: var(--warn-bg);
+    border: 1px solid #EF9F27;
+    border-radius: var(--radius);
+    font-size: 13px;
+    color: var(--warn);
+    margin-top: 10px;
+  }
+  .alert.visible { display: block; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 40px 0 0;
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 480px) {
+    .form-block { padding: 20px 16px; }
+    .hero { padding: 32px 0 24px; }
+    .hero-stats { gap: 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <nav>
+    <div class="logo">Zynk<span>Tech</span></div>
+    <span class="nav-tag">Diagnóstico gratuito</span>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-eyebrow">Para pymes colombianas</div>
+    <h1>¿En qué está perdiendo tiempo y dinero <em>tu operación?</em></h1>
+    <p class="hero-sub">Marca los puntos que aplican a tu negocio. En 2 minutos sabrás exactamente qué está fallando en tu POS, inventarios y procesos — y qué hacer para resolverlo.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#1A3BFF"/><path d="M7 4v3.5l2 1.5" stroke="#1A3BFF" stroke-linecap="round"/></svg>
+        2 minutos
+      </div>
+      <div class="hero-stat">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="3" stroke="#1A3BFF"/><path d="M4 7h6M4 4.5h6M4 9.5h4" stroke="#1A3BFF" stroke-linecap="round"/></svg>
+        12 puntos de control
+      </div>
+      <div class="hero-stat">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L8.8 5H13L9.6 7.6l1.3 4L7 9.3 3.1 11.6l1.3-4L1 5h4.2L7 1z" stroke="#1A3BFF" stroke-linejoin="round"/></svg>
+        Diagnóstico sin costo
+      </div>
+    </div>
+  </section>
+
+  <div class="progress-header">
+    <span class="progress-label">Progreso</span>
+    <span class="progress-count" id="prog-count">0 / 12</span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+
+  <!-- POS -->
+  <div class="section-label">Punto de venta <span class="section-pill pill-pos">POS</span></div>
+
+  <div class="item" onclick="toggle(this)" data-id="1">
+    <span class="item-num">01</span>
+    <div class="item-box"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1 4L4 7L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="item-body">
+      <div class="item-title">Cierres de caja manuales con diferencias frecuentes</div>
+      <div class="item-desc">El cuadre se hace en papel o Excel y aparecen faltantes que no se pueden rastrear.</div>
+    </div>
+  </div>
+
+  <div class="item" onclick="toggle(this)" data-id="2">
+    <span class="item-num">02</span>
+    <div class="item-box"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1 4L4 7L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="item-body">
+      <div class="item-title">No sabes en tiempo real cuánto has vendido hoy</div>
+      <div class="item-desc">Para saber las ventas del día tienes que esperar al cierre o preguntar a alguien.</div>
+    </div>
+  </div>
+
+  <div class="item" onclick="toggle(this)" data-id="3">
+    <span class="item-num">03</span>
+    <div class="item-box"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1 4L4 7L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="item-body">
+      <div class="item-title">Las ventas no se conectan con el inventario automáticamente</div>
+      <div class="item-desc">Cada venta requiere actualizar el stock a mano en otro sistema o cuaderno.</div>
+    </div>
+  </div>
+
+  <div class="item" onclick="toggle(this)" data-id="4">
+    <span class="item-num">04</span>
+    <div class="item-box"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1 4L4 7L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="item-body">
+      <div class="item-title">Tus colaboradores manejan precios o descuentos sin control</div>
+      <div class="item-desc">No hay restricciones de usuario, cualquiera puede modificar precios sin autorización.</div>
+    </div>
+  </div>
+
+  <!-- INVENTARIOS -->
+  <div class="section-label">Inventarios <span class="section-pill pill-inv">Zynk Inventory</span></div>
+
+  <div class="item" onclick="toggle(this)" data-id="5">
+    <span class="item-num">05</span>
+    <div class="item-box"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1 4L4 7L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="item-body">
+      <div class="item-title">Los conteos físicos te toman días y siguen siendo inexactos</div>
+      <div class="item-desc">El inventario se hace con planillas en papel y hay que transcribir todo al sistema.</div>
+    </div>
+  </div>
+
+  <div class="item" onclick="toggle(this)" data-id="6">
+    <span class="item-num">06</span>
+    <div class="item-box"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1 4L4 7L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="item-body">
+      <div class="item-title">Te quedas sin stock de productos clave sin aviso</div>
+      <div class="item-desc">Las roturas de inventario las descubres cuando el cliente ya las pidió o al buscar el producto.</div>
+    </div>
+  </div>
+
+  <div class="item" onclick="toggle(this)" data-id="7">
+    <span class="item-num">07</span>
+    <div class="item-box"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1 4L4 7L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="item-body">
+      <div class="item-title">Tienes mercancía parada que no rota hace meses</div>
+      <div class="item-desc">No hay visibilidad de qué productos se mueven poco, generando capital inmovilizado.</div>
+    </div>
+  </div>
+
+  <div class="item" onclick="toggle(this)" data-id="8">
+    <span class="item-num">08</span>
+    <div class="item-box"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1 4L4 7L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="item-body">
+      <div class="item-title">No puedes comparar inventario entre bodegas o sedes</div>
+      <div class="item-desc">Cada sede maneja su propio conteo sin cruzar la información con los demás puntos.</div>
+    </div>
+  </div>
+
+  <!-- AUTOMATIZACIÓN -->
+  <div class="section-label">Procesos y automatización <span class="section-pill pill-auto">Automatización</span></div>
+
+  <div class="item" onclick="toggle(this)" data-id="9">
+    <span class="item-num">09</span>
+    <div class="item-box"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1 4L4 7L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="item-body">
+      <div class="item-title">Tienes personas haciendo tareas que podría hacer un sistema</div>
+      <div class="item-desc">Reportes, envío de correos, registros de entradas y salidas son tareas manuales y diarias.</div>
+    </div>
+  </div>
+
+  <div class="item" onclick="toggle(this)" data-id="10">
+    <span class="item-num">10</span>
+    <div class="item-box"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1 4L4 7L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="item-body">
+      <div class="item-title">Tu información vive en Excel, WhatsApp y correos sin centralizar</div>
+      <div class="item-desc">Para tomar decisiones tienes que pedir datos a varias personas y consolidarlos a mano.</div>
+    </div>
+  </div>
+
+  <div class="item" onclick="toggle(this)" data-id="11">
+    <span class="item-num">11</span>
+    <div class="item-box"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1 4L4 7L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="item-body">
+      <div class="item-title">No tienes visibilidad de lo que pasa en tu negocio cuando no estás</div>
+      <div class="item-desc">Solo te enteras de los problemas cuando regresan a ti, no antes ni en tiempo real.</div>
+    </div>
+  </div>
+
+  <div class="item" onclick="toggle(this)" data-id="12">
+    <span class="item-num">12</span>
+    <div class="item-box"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1 4L4 7L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="item-body">
+      <div class="item-title">Tu red o infraestructura falla y afecta las ventas y la operación</div>
+      <div class="item-desc">Cortes de internet, equipos lentos o falta de CCTV generan pérdidas y cuellos de botella.</div>
+    </div>
+  </div>
+
+  <!-- FORMULARIO -->
+  <div class="form-block" id="form-block">
+    <h2>Recibe tu diagnóstico personalizado</h2>
+    <p>Ingresa tus datos y un especialista de Zynk Tech te contacta con el plan de acción para los puntos que marcaste.</p>
+
+    <div class="field">
+      <label for="nombre">Nombre completo</label>
+      <input type="text" id="nombre" placeholder="Juan Pérez" autocomplete="name">
+    </div>
+    <div class="field">
+      <label for="empresa">Empresa o negocio</label>
+      <input type="text" id="empresa" placeholder="Distribuidora Norte S.A.S." autocomplete="organization">
+    </div>
+    <div class="field">
+      <label for="whatsapp">WhatsApp</label>
+      <input type="tel" id="whatsapp" placeholder="+57 300 000 0000" autocomplete="tel">
+    </div>
+
+    <div class="alert" id="form-alert">Por favor completa todos los campos antes de enviar.</div>
+
+    <button class="submit-btn" id="submit-btn" onclick="submitForm()">Enviar diagnóstico</button>
+    <p class="form-disclaimer">Tu información es confidencial. Solo la usamos para enviarte el plan de acción.<br>Sin spam, sin listas, sin venta de datos.</p>
+  </div>
+
+  <!-- RESULTADO -->
+  <div class="result-block" id="result-block">
+    <div class="result-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 13L9 17L19 7" stroke="#0F6E56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h2>¡Diagnóstico enviado!</h2>
+    <div class="result-score">
+      <span class="result-score-num" id="result-num">0</span>
+      <span class="result-score-label">de 12 puntos identificados</span>
+    </div>
+    <p id="result-msg">Un especialista de Zynk Tech revisará tus resultados y te contactará por WhatsApp en las próximas horas con el plan de acción para tu negocio.</p>
+    <a href="https://oficial.zynktechsolutions.com" class="result-cta" target="_blank">Conocer más sobre Zynk Tech →</a>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 <a href="https://oficial.zynktechsolutions.com" target="_blank">Zynk Tech Solutions</a> — Software e infraestructura para pymes. Cartagena, Colombia.</p>
+  </footer>
+
+</div>
+
+<script>
+  var checked = new Set();
+  var total = 12;
+
+  function toggle(el) {
+    var id = el.getAttribute('data-id');
+    if (checked.has(id)) {
+      checked.delete(id);
+      el.classList.remove('checked');
+    } else {
+      checked.add(id);
+      el.classList.add('checked');
+    }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    var n = checked.size;
+    document.getElementById('prog-fill').style.width = Math.round((n / total) * 100) + '%';
+    document.getElementById('prog-count').textContent = n + ' / ' + total;
+  }
+
+  function submitForm() {
+    var nombre = document.getElementById('nombre').value.trim();
+    var empresa = document.getElementById('empresa').value.trim();
+    var whatsapp = document.getElementById('whatsapp').value.trim();
+    var alert = document.getElementById('form-alert');
+
+    if (!nombre || !empresa || !whatsapp) {
+      alert.classList.add('visible');
+      return;
+    }
+    alert.classList.remove('visible');
+
+    var btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    var puntos = Array.from(checked).sort(function(a,b){return a-b;}).join(', ');
+    var waMsg = encodeURIComponent(
+      '¡Hola Zynk Tech! Acabo de completar el diagnóstico operacional.\n\n' +
+      'Nombre: ' + nombre + '\n' +
+      'Empresa: ' + empresa + '\n' +
+      'WhatsApp: ' + whatsapp + '\n' +
+      'Puntos marcados (' + checked.size + '/12): ' + (puntos || 'ninguno') + '\n\n' +
+      'Quisiera recibir el plan de acción para mi negocio.'
+    );
+
+    setTimeout(function() {
+      document.getElementById('form-block').style.display = 'none';
+      var rb = document.getElementById('result-block');
+      rb.classList.add('visible');
+      document.getElementById('result-num').textContent = checked.size;
+
+      var msg = checked.size >= 8
+        ? 'Tu operación tiene oportunidades de mejora significativas. Un especialista de Zynk Tech revisará tus resultados y te contactará por WhatsApp en las próximas horas con un plan de acción concreto.'
+        : checked.size >= 4
+        ? 'Identificaste puntos clave que están consumiendo tiempo y dinero. Un especialista de Zynk Tech te contactará por WhatsApp para mostrarte cómo resolverlos.'
+        : 'Encontraste algunas áreas de mejora. Un especialista de Zynk Tech te contactará para orientarte sobre los siguientes pasos.';
+      document.getElementById('result-msg').textContent = msg;
+
+      window.open('https://wa.me/573042478186?text=' + waMsg, '_blank');
+    }, 800);
+  }
+</script>
+</body>
+</html>
